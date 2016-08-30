@@ -72,6 +72,7 @@ Plug 'hail2u/vim-css3-syntax'         "CSS3 syntax support
 Plug 'cakebaker/scss-syntax.vim'      "Syntax file for SASS
 Plug 'stanangeloff/php.vim'           "PHP syntax file (5.3 - 5.6)
 Plug 'shawncplus/phpcomplete.vim'     "Improved PHP omnicompletion
+Plug 'tobyS/vmustache'                "Required for pdv
 Plug 'tobyS/pdv'                      "PHP documentor for vim
 Plug 'arnaud-lb/vim-php-namespace'    "Insert PHP use statements automatically
 Plug 'stephpy/vim-php-cs-fixer'       "Executes php-cs-fixer on a directory or file
@@ -399,6 +400,12 @@ nnoremap <leader>sc :SyntasticCheck<CR> :lopen<CR>
 
 let g:tagbar_phpctags_memory_limit = '512M'
 
+
+" PDV CONFIGURATION
+" ----------------------------------------------------------
+
+let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates"
+autocmd FileType php nnoremap <leader>\ :call pdv#DocumentCurrentLine()<CR>
 
 " LIGHTLINE FUNCTIONS
 " ----------------------------------------------------------
