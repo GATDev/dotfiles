@@ -155,9 +155,14 @@ alias psrc='phpunit src'
 alias shf='defaults write com.apple.finder AppleShowAllFiles YES'
 alias hhf='defaults write com.apple.finder AppleShowAllFiles NO'
 
+# Ctags Shortcuts
+alias ctags="`brew --prefix`/bin/ctags"
+
+# Behat Shortcuts
+alias behat='./vendor/bin/behat'
 
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
