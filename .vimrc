@@ -1,8 +1,12 @@
 " Author: Gary Thirkell
-" Last Update: 29th August 2016
+" Last Update: 6th September 2016
 
 " ENVIRONMENT
 " ----------------------------------------------------------
+
+let g:python_host_prog='/usr/local/bin/python2'
+let g:python3_host_prog='/usr/local/bin/python3.5'
+let $PATH=$PATH . ':' . expand('~/.composer/vendor/bin')
 
 " Platform identification
 function! OSX()
@@ -16,12 +20,6 @@ function! WINDOWS()
 endfunction
 
 set nocompatible
-
-"Deoplete function
-function! DoRemote(arg)
-    UpdateRemotePlugins
-endfunction
-
 
 " VIM-PLUG
 " ----------------------------------------------------------
@@ -52,6 +50,8 @@ Plug 'tpope/vim-speeddating'          "Increment/decrement dates and times
 Plug 'tpope/vim-repeat'               "Remaps . so that plugins can use it
 Plug 'tpope/vim-eunuch'               "UNIX shell commands
 Plug 'tpope/vim-obsession'            "Continuously updated session files
+Plug 'tpope/vim-cucumber'             "Syntax highlighting for .feature files
+Plug 'godlygeek/tabular'              "Text filtering and alignment
 Plug 'tComment'                       "Filetype sensitive comments for vim
 Plug 'itchyny/lightline.vim'          "A light and configurable statusline/tabline
 Plug 'pangloss/vim-javascript'        "Improved Javascript indentation and syntax support
@@ -71,9 +71,10 @@ Plug 'evidens/vim-twig'               "Twig syntax highlighting and snippets
 Plug 'hail2u/vim-css3-syntax'         "CSS3 syntax support
 Plug 'cakebaker/scss-syntax.vim'      "Syntax file for SASS
 Plug 'stanangeloff/php.vim'           "PHP syntax file (5.3 - 5.6)
-Plug 'shawncplus/phpcomplete.vim'     "Improved PHP omnicompletion
+" Plug 'shawncplus/phpcomplete.vim'     "Improved PHP omnicompletion
 Plug 'tobyS/vmustache'                "Required for pdv
 Plug 'tobyS/pdv'                      "PHP documentor for vim
+Plug 'mkusher/padawan.vim'            "Padawan PHP completion server plugin
 Plug 'arnaud-lb/vim-php-namespace'    "Insert PHP use statements automatically
 Plug 'stephpy/vim-php-cs-fixer'       "Executes php-cs-fixer on a directory or file
 Plug 'christoomey/vim-tmux-navigator' "Seamless navigation between tmux panes and vim splits
@@ -81,7 +82,7 @@ Plug 'vim-scripts/SyntaxRange'        "Define different filetype syntax on buffe
 Plug 'vim-scripts/taglist.vim'        "Overview of the structure of source code files
 Plug 'majutsushi/tagbar'              "Easy way to view the tags of the current file
 Plug 'vim-php/tagbar-phpctags.vim'    "Generate phpctags for tagbar
-Plug 'ervandew/supertab'              "Perform all insert mode completions with Tab
+" Plug 'ervandew/supertab'              "Perform all insert mode completions with Tab
 Plug 'terryma/vim-multiple-cursors'   "Multiple cursors
 Plug 'qbbr/vim-symfony'               "Symfony2 autocompletion and snippets
 Plug 'Shougo/unite.vim'               "search files, buffers, recently used files or registers
@@ -89,19 +90,10 @@ Plug 'Shougo/neosnippet'              "Asynchronous snippet plugin
 Plug 'Shougo/neosnippet-snippets'     "Standard neosnippet snippets repository
 Plug 'junegunn/goyo.vim'              "Distraction free writing
 Plug 'junegunn/fzf.vim'               "Asynchronous fuzzy file finder
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'pbogut/deoplete-padawan'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-if OSX() "Asynchronous fuzzy file finder
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-endif
-if WINDOWS()
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'install --all'  }
-endif
-if OSX() "More advanced omnicompletion
-    Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-endif
-if WINDOWS()
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-endif
 
 call plug#end()
 
@@ -218,14 +210,6 @@ set visualbell
 set laststatus=2
 set showcmd
 
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=m
-    set guioptions-=r
-    set guioptions-=L
-    set guioptions-=t
-    set mousehide
-endif
 command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
             \ | wincmd p | diffthis
 
@@ -407,6 +391,7 @@ let g:tagbar_phpctags_memory_limit = '512M'
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates"
 autocmd FileType php nnoremap <leader>\ :call pdv#DocumentCurrentLine()<CR>
 
+
 " LIGHTLINE FUNCTIONS
 " ----------------------------------------------------------
 
@@ -445,3 +430,26 @@ function! LightLineFilename()
                 \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
                 \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
+
+
+" TABULAR FUNCTION
+" ----------------------------------------------------------
+
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
+function! s:align()
+    let p = '^\s*|\s.*\s|\s*$'
+    if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+        let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+        let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+        Tabularize/|/l1
+        normal! 0
+        call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+    endif
+endfunction
+
+
+" PADAWAN CONFIGURATION
+" ----------------------------------------------------------
+
+let g:padawan#composer_command = "composer"
