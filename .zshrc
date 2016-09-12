@@ -144,9 +144,9 @@ alias bup='brew update && brew upgrade'
 alias ssr='bin/console server:run'
 alias sss='bin/console server:stop'
 alias ssec='bin/console security:check'
-alias cclear='php -d memory_limit=200M app/console cache:clear'
-alias uproutes='php app/console sonata:page:update-core-routes --site-all'
-alias snaps='php app/console sonata:page:create-snapshots --site-all'
+alias cclear='php -d memory_limit=200M bin/console cache:clear'
+alias uproutes='php bin/console sonata:page:update-core-routes --site-all'
+alias snaps='php bin/console sonata:page:create-snapshots --site-all'
 
 # PHPUnit Shortcuts
 alias psrc='phpunit src'
