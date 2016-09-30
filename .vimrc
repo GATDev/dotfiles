@@ -1,5 +1,5 @@
 " Author: Gary Thirkell
-" Last Update: 6th September 2016
+" Last Update: 30th September 2016
 
 " ENVIRONMENT
 " ----------------------------------------------------------
@@ -85,6 +85,7 @@ Plug 'vim-php/tagbar-phpctags.vim'    "Generate phpctags for tagbar
 " Plug 'ervandew/supertab'              "Perform all insert mode completions with Tab
 Plug 'terryma/vim-multiple-cursors'   "Multiple cursors
 Plug 'qbbr/vim-symfony'               "Symfony2 autocompletion and snippets
+Plug 'vimwiki/vimwiki'                "Personal wiki for vim
 Plug 'Shougo/unite.vim'               "search files, buffers, recently used files or registers
 Plug 'Shougo/neosnippet'              "Asynchronous snippet plugin
 Plug 'Shougo/neosnippet-snippets'     "Standard neosnippet snippets repository
@@ -264,7 +265,7 @@ autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
 " Trailing Whitespace
 set listchars=tab:>\ ,trail:•,extends:>,precedes:<,nbsp:+
 set list
-nmap <leader>ws :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+nmap <leader>§ :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 " Restore cursor to most recent position in file
 function! ResCur()
