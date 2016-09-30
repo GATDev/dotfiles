@@ -59,7 +59,7 @@ plugins=(git vi-mode vagrant composer brew osx sudo symfony2 tmux tmuxinator com
 
 # User configuration
 
-export PATH="/Users/gary/.composer/vendor/bin:/usr/local/bin:/Users/gary/.rvm/gems/ruby-2.2.1/bin:/Users/gary/.rvm/gems/ruby-2.2.1@global/bin:/Users/gary/.rvm/rubies/ruby-2.2.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/gary/.composer/vendor/bin:/Users/gary/.rvm/gems/ruby-2.2.1/bin:/Users/gary/.rvm/gems/ruby-2.2.1@global/bin:/Users/gary/.rvm/rubies/ruby-2.2.1/bin:/Users/gary/.rvm/bin:/Users/gary/.rvm/bin:/Users/gary/.npm-packages/bin"
+export PATH="/Users/gary/.composer/vendor/bin:/usr/local/bin:/usr/local/sbin:/Users/gary/.rvm/gems/ruby-2.2.1/bin:/Users/gary/.rvm/gems/ruby-2.2.1@global/bin:/Users/gary/.rvm/rubies/ruby-2.2.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/gary/.composer/vendor/bin:/Users/gary/.rvm/gems/ruby-2.2.1/bin:/Users/gary/.rvm/gems/ruby-2.2.1@global/bin:/Users/gary/.rvm/rubies/ruby-2.2.1/bin:/Users/gary/.rvm/bin:/Users/gary/.rvm/bin:/Users/gary/.npm-packages/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -166,3 +166,4 @@ test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_in
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="/usr/local/sbin:$PATH"
