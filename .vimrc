@@ -451,6 +451,16 @@ function! s:align()
 endfunction
 
 
+function! PhpSyntaxOverride()
+  hi! def link phpDocTags  phpKeyword
+endfunction
+
+augroup phpSyntaxOverride
+  autocmd!
+  autocmd FileType php call PhpSyntaxOverride()
+augroup END
+
+
 " PADAWAN CONFIGURATION
 " ----------------------------------------------------------
 
