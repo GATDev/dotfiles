@@ -32,6 +32,7 @@ if WINDOWS()
 endif
 
 Plug 'morhetz/gruvbox'                "Gruvbox theme
+Plug 'tomasr/molokai'                 "Moloaki theme
 Plug 'easymotion/vim-easymotion'      "Jump to motion target with one key
 Plug 'greplace.vim'                   "Global search and replace for vim
 Plug 'sheerun/vim-polyglot'           "A pack of 70+ language syntaxes
