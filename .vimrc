@@ -33,6 +33,8 @@ endif
 
 Plug 'morhetz/gruvbox'                "Gruvbox theme
 Plug 'tomasr/molokai'                 "Moloaki theme
+Plug 'jdkanani/vim-material-theme'    "Material theme
+Plug 'mhartington/oceanic-next'       "Oceanic theme
 Plug 'easymotion/vim-easymotion'      "Jump to motion target with one key
 Plug 'greplace.vim'                   "Global search and replace for vim
 Plug 'sheerun/vim-polyglot'           "A pack of 70+ language syntaxes
@@ -169,7 +171,7 @@ let g:gruvbox_bold=1
 let g:gruvbox_undercurl=1
 let g:gruvbox_italicize_comments=1
 let g:gruvbox_italic=1
-colorscheme gruvbox
+colorscheme OceanicNext
 set background=dark
 
 function! ToggleBG()
